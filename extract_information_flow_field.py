@@ -56,9 +56,13 @@ def determine_optical_flow(prev_bgr, bgr, graphics= True):
         color = (0,255,0);
         for p in range(n_points):
             cv2.arrowedLine(im, tuple(points_old[p, :]), tuple(points_new[p,:]), color);
-        cv2.imshow('Flow', im);
-        cv2.waitKey(100);
-        cv2.destroyAllWindows()
+         
+        plt.figure();
+        plt.imshow(im);
+        plt.title('Optical flow');
+        #cv2.imshow('Flow', im);
+        #cv2.waitKey(100);
+        #cv2.destroyAllWindows()
     
     return points_old, points_new, flow_vectors;
 
@@ -158,6 +162,16 @@ def compare_file_names(name1, name2):
     number2 = get_number_file_name(name2);
     return number1 - number2;
     
+def show_flow(image_nr_1, image_nr_2, image_dir_name = './image_sequence_pure_ver1/', image_prefix='image_', image_type = 'jpg'):
+    image_name_1 = image_dir_name + image_prefix + str(image_nr_1) + '.' + image_type;
+    prev_bgr = cv2.imread(image_name_1);
+    image_name_2 = image_dir_name + image_prefix + str(image_nr_2) + '.' + image_type;
+    bgr = cv2.imread(image_name_2);
+    # print('name1: {}\nname2: {}'.format(image_name_1, image_name_2));
+    points_old, points_new, flow_vectors = determine_optical_flow(prev_bgr, bgr, graphics=True);
+    
+    
+
 def extract_flow_information(image_dir_name = './image_sequence_pure_ver1/', image_type = 'jpg', verbose=True, graphics = True, flow_graphics = False):
     
     # get the image names from the directory:
