@@ -206,7 +206,8 @@ def extract_flow_information(image_dir_name = './image_sequence_pure_ver1/', ima
             points_old, points_new, flow_vectors = determine_optical_flow(prev_bgr, bgr, graphics=flow_graphics);
             # do stuff
             elapsed = time.time() - t_before;
-            print('Elapsed time = {}'.format(elapsed));
+            if(verbose):
+                print('Elapsed time = {}'.format(elapsed));
             elapsed_times[im] = elapsed;
 
             # convert the pixels to a frame where the coordinate in the center is (0,0)
