@@ -169,7 +169,7 @@ def show_flow(image_nr_1, image_nr_2, image_dir_name = './image_sequence_pure_ve
     bgr = cv2.imread(image_name_2);
     # print('name1: {}\nname2: {}'.format(image_name_1, image_name_2));
     points_old, points_new, flow_vectors = determine_optical_flow(prev_bgr, bgr, graphics=True);
-    
+    return points_old, points_new, flow_vectors;
     
 
 def extract_flow_information(image_dir_name = './image_sequence_pure_ver1/', image_type = 'jpg', verbose=True, graphics = True, flow_graphics = False):
