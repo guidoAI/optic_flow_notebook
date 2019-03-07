@@ -51,7 +51,7 @@ def determine_optical_flow(prev_bgr, bgr, graphics= True):
     flow_vectors = points_new - points_old;
     
     if(graphics):
-        im = prev_bgr.copy();
+        im = (0.5 * prev_bgr.copy().astype(float) + 0.5 * bgr.copy().astype(float)) / 255.0;
         n_points = len(points_old);
         color = (0,255,0);
         for p in range(n_points):
@@ -165,8 +165,18 @@ def compare_file_names(name1, name2):
 def show_flow(image_nr_1, image_nr_2, image_dir_name = './image_sequence_pure_ver1/', image_prefix='image_', image_type = 'jpg'):
     image_name_1 = image_dir_name + image_prefix + str(image_nr_1) + '.' + image_type;
     prev_bgr = cv2.imread(image_name_1);
+    
+    plt.figure();
+    plt.imshow(prev_bgr);
+    plt.title('First image, nr' + str(image_nr_1));
+    
     image_name_2 = image_dir_name + image_prefix + str(image_nr_2) + '.' + image_type;
     bgr = cv2.imread(image_name_2);
+    
+    plt.figure();
+    plt.imshow(bgr);
+    plt.title('Second image, nr' + str(image_nr_2));
+    
     # print('name1: {}\nname2: {}'.format(image_name_1, image_name_2));
     points_old, points_new, flow_vectors = determine_optical_flow(prev_bgr, bgr, graphics=True);
     return points_old, points_new, flow_vectors;
