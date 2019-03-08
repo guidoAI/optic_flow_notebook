@@ -53,7 +53,7 @@ def determine_optical_flow(prev_bgr, bgr, graphics= True):
     if(graphics):
         im = (0.5 * prev_bgr.copy().astype(float) + 0.5 * bgr.copy().astype(float)) / 255.0;
         n_points = len(points_old);
-        color = (0,255,0);
+        color = (0.0,1.0,0.0);
         for p in range(n_points):
             cv2.arrowedLine(im, tuple(points_old[p, :]), tuple(points_new[p,:]), color);
          
