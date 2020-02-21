@@ -123,7 +123,7 @@ def estimate_linear_flow_field(points_old, flow_vectors, RANSAC=False, n_iterati
                 errs[errs > error_threshold] = error_threshold;
                 errors[it, 0] = np.mean(errs);
                 # vertical flow:
-                v_vector_small = flow_vectors[inds, 0];
+                v_vector_small = flow_vectors[inds, 1];
                 # pv[it, :] = np.linalg.solve(AA, VV);
                 pv[it, :] = np.dot(pseudo_inverse_AA, v_vector_small);
                 errs = np.abs(np.dot(A, pv[it,:]) - v_vector);
